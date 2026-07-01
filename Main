@@ -50,3 +50,30 @@ public class Main {
             }
         }
     }
+
+
+
+   private static void carregarDados() {
+        File arquivo = new File(ARQUIVO_DADOS);
+ 
+        if (!arquivo.exists()) {
+            criarDadosIniciais();
+            return;
+        }
+ 
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(arquivo))) {
+            DadosStore dados = (DadosStore) in.readObject();
+            clientes = dados.clientes;
+            bibliotecarios = dados.bibliotecarios;
+            livros = dados.livros;
+            autores = dados.autores;
+            editoras = dados.editoras;
+            categorias = dados.categorias;
+            emprestimos = dados.emprestimos;
+            ajustarContadoresDeId();
+            System.out.println("Dados carregados de " + ARQUIVO_DADOS + ".");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Não foi possível ler os dados salvos, iniciando do zero.");
+            criarDadosIniciais();
+        }
+    }
