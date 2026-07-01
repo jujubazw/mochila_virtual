@@ -1,0 +1,17 @@
+package mochila;
+ 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+ 
+public class Cliente extends Pessoa {
+ 
+    private static final int LIMITE_EMPRESTIMOS = 3;
+ 
+    private String matricula;
+    private LocalDate dataIngresso;
+    private boolean ativo;
+    private String senhaHash;
+    private List<Emprestimo> emprestimos = new ArrayList<>();
+    private List<Reserva> reservas = new ArrayList<>();
+ 
