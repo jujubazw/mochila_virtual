@@ -77,3 +77,30 @@ public class Main {
             criarDadosIniciais();
         }
     }
+
+   private static void salvarDados() {
+        DadosStore dados = new DadosStore();
+        dados.clientes = clientes;
+        dados.bibliotecarios = bibliotecarios;
+        dados.livros = livros;
+        dados.autores = autores;
+        dados.editoras = editoras;
+        dados.categorias = categorias;
+        dados.emprestimos = emprestimos;
+ 
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ARQUIVO_DADOS))) {
+            out.writeObject(dados);
+        } catch (IOException e) {
+            System.out.println("Não foi possível salvar os dados: " + e.getMessage());
+        }
+    }
+ 
+    private static void ajustarContadoresDeId() {
+        emprestimos.stream().mapToInt(Emprestimo::getId).max()
+                .ifPresent(Emprestimo::ajustarProximoId);
+ 
+        clientes.stream()
+                .flatMap(c -> c.getReservas().stream())
+                .mapToInt(Reserva::getId).max()
+                .ifPresent(Reserva::ajustarProximoId);
+    }
