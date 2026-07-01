@@ -84,3 +84,12 @@ public class Cliente extends Pessoa {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+ 
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+}
