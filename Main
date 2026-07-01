@@ -199,4 +199,45 @@ public class Main {
         clientes.add(cliente);
         salvarDados();
         System.out.println("Cliente cadastrado com sucesso.");
+    }private static void cadastrarBibliotecario() {
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("CPF: ");
+        String cpf = sc.nextLine();
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+        System.out.print("Telefone: ");
+        String telefone = sc.nextLine();
+        System.out.print("Matrícula: ");
+        String matricula = sc.nextLine();
+        System.out.print("Cargo: ");
+        String cargo = sc.nextLine();
+        System.out.print("Senha: ");
+        String senha = sc.nextLine();
+ 
+        Bibliotecario bibliotecario = new Bibliotecario(nome, cpf, email, telefone, matricula, cargo);
+        bibliotecario.alterarSenha(senha);
+        bibliotecarios.add(bibliotecario);
+        salvarDados();
+        System.out.println("Bibliotecário cadastrado com sucesso.");
     }
+ 
+    private static void loginCliente() {
+        System.out.print("Matrícula: ");
+        String matricula = sc.nextLine();
+        System.out.print("Senha: ");
+        String senha = sc.nextLine();
+ 
+        Cliente cliente = clientes.stream()
+                .filter(c -> c.getMatricula().equals(matricula))
+                .findFirst()
+                .orElse(null);
+ 
+        if (cliente == null || !cliente.autenticar(senha)) {
+            System.out.println("Matrícula ou senha inválidos.");
+            return;
+        }
+
+    
+
+    
