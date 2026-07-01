@@ -104,3 +104,70 @@ public class Main {
                 .mapToInt(Reserva::getId).max()
                 .ifPresent(Reserva::ajustarProximoId);
     }
+
+    private static void criarDadosIniciais() {
+        clientes = new ArrayList<>();
+        bibliotecarios = new ArrayList<>();
+        livros = new ArrayList<>();
+        autores = new ArrayList<>();
+        editoras = new ArrayList<>();
+        categorias = new ArrayList<>();
+        emprestimos = new ArrayList<>();
+ 
+        Bibliotecario admin = new Bibliotecario("Ana Ribeiro", "000.000.000-00", "ana@biblioteca.com", "9999-0000", "B001", "Atendente");
+        admin.alterarSenha("1234");
+        bibliotecarios.add(admin);
+ 
+        Cliente clienteTeste = new Cliente("Carlos Souza", "111.111.111-11", "carlos@email.com", "8888-1111", "C001", LocalDate.now());
+        clienteTeste.alterarSenha("1234");
+        clientes.add(clienteTeste);
+ 
+        Editora companhia = new Editora(1, "Companhia das Letras", "12345678000100");
+        Editora atica = new Editora(2, "Ática", "22345678000100");
+        Editora prentice = new Editora(3, "Prentice Hall", "32345678000100");
+        editoras.add(companhia);
+        editoras.add(atica);
+        editoras.add(prentice);
+ 
+        Autor machado = new Autor(1, "Machado de Assis", "Brasileira");
+        Autor aluisio = new Autor(2, "Aluísio Azevedo", "Brasileira");
+        Autor martin = new Autor(3, "Robert C. Martin", "Americana");
+        autores.add(machado);
+        autores.add(aluisio);
+        autores.add(martin);
+ 
+        Categoria romance = new Categoria(1, "Romance", "Ficção clássica brasileira");
+        Categoria tecnologia = new Categoria(2, "Tecnologia", "Livros sobre programação e software");
+        categorias.add(romance);
+        categorias.add(tecnologia);
+ 
+        Livro domCasmurro = new Livro("978-85-359-0277-5", "Dom Casmurro", 1899, 1, companhia);
+        domCasmurro.adicionarAutor(machado);
+        domCasmurro.adicionarCategoria(romance);
+        domCasmurro.adicionarExemplar(new Exemplar("978-85-359-0277-5-1", LocalDate.now()));
+        domCasmurro.adicionarExemplar(new Exemplar("978-85-359-0277-5-2", LocalDate.now()));
+ 
+        Livro oCortico = new Livro("978-85-260-0355-1", "O Cortiço", 1890, 1, atica);
+        oCortico.adicionarAutor(aluisio);
+        oCortico.adicionarCategoria(romance);
+        oCortico.adicionarExemplar(new Exemplar("978-85-260-0355-1-1", LocalDate.now()));
+ 
+        Livro cleanCode = new Livro("978-0-13-235088-4", "Clean Code", 2008, 1, prentice);
+        cleanCode.adicionarAutor(martin);
+        cleanCode.adicionarCategoria(tecnologia);
+        cleanCode.adicionarExemplar(new Exemplar("978-0-13-235088-4-1", LocalDate.now()));
+        cleanCode.adicionarExemplar(new Exemplar("978-0-13-235088-4-2", LocalDate.now()));
+        cleanCode.adicionarExemplar(new Exemplar("978-0-13-235088-4-3", LocalDate.now()));
+ 
+        livros.add(domCasmurro);
+        livros.add(oCortico);
+        livros.add(cleanCode);
+ 
+        admin.adicionarAoAcervo(domCasmurro);
+        admin.adicionarAoAcervo(oCortico);
+        admin.adicionarAoAcervo(cleanCode);
+ 
+        System.out.println("Nenhum dado salvo encontrado. Criado ambiente de exemplo:");
+        System.out.println("Bibliotecário -> matrícula B001, senha 1234");
+        System.out.println("Cliente -> matrícula C001, senha 1234");
+    }
