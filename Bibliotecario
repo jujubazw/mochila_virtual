@@ -34,4 +34,36 @@ public class Bibliotecario extends Pessoa implements Relatorio {
         return devolucao;
     }
 
-    
+    public void gerenciarAcervo() {
+        acervo.removeIf(livro -> livro.listarExemplares().isEmpty());
+    }
+ 
+    public void adicionarAoAcervo(Livro livro) {
+        acervo.add(livro);
+    }
+ 
+    @Override
+    public String gerarRelatorio() {
+        return "Bibliotecário " + getNome() + " - " + acervo.size() + " livros no acervo";
+    }
+ 
+    public String getMatricula() {
+        return matricula;
+    }
+ 
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+ 
+    public String getCargo() {
+        return cargo;
+    }
+ 
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+ 
+    public List<Livro> getAcervo() {
+        return acervo;
+    }
+}
