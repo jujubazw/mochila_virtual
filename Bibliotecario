@@ -15,3 +15,21 @@ public class Bibliotecario extends Pessoa implements Relatorio {
         this.matricula = matricula;
         this.cargo = cargo;
     }
+
+    public boolean autenticar(String senha) {
+        return senhaHash != null && senhaHash.equals(Integer.toString(senha.hashCode()));
+    }
+ 
+    public void alterarSenha(String novaSenha) {
+        this.senhaHash = Integer.toString(novaSenha.hashCode());
+    }
+ 
+    public Emprestimo registrarEmprestimo(Cliente cliente, Exemplar exemplar) throws LimiteEmprestimosException {
+        return cliente.realizarEmprestimo(exemplar);
+    }
+ 
+    public Devolucao registrarDevolucao(Emprestimo emprestimo) {
+        Devolucao devolucao = new Devolucao(emprestimo);
+        devolucao.registrarDevolucao();
+        return devolucao;
+    }
