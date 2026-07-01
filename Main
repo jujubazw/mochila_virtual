@@ -238,6 +238,52 @@ public class Main {
             return;
         }
 
+       menuCliente(cliente);
+    }
+ 
+    private static void loginBibliotecario() {
+        System.out.print("Matrícula: ");
+        String matricula = sc.nextLine();
+        System.out.print("Senha: ");
+        String senha = sc.nextLine();
+ 
+        Bibliotecario bibliotecario = bibliotecarios.stream()
+                .filter(b -> b.getMatricula().equals(matricula))
+                .findFirst()
+                .orElse(null);
+ 
+        if (bibliotecario == null || !bibliotecario.autenticar(senha)) {
+            System.out.println("Matrícula ou senha inválidos.");
+            return;
+        }
+ 
+        menuBibliotecario(bibliotecario);
+    }
+ 
+    private static void menuCliente(Cliente cliente) {
+        while (true) {
+            System.out.println("\n--- Olá, " + cliente.getNome() + " ---");
+            System.out.println("1 - Ver livros disponíveis");
+            System.out.println("2 - Realizar empréstimo");
+            System.out.println("3 - Fazer reserva");
+            System.out.println("4 - Meus empréstimos");
+            System.out.println("5 - Minhas reservas");
+            System.out.println("0 - Logout");
+            System.out.print("Opção: ");
+ 
+            switch (lerOpcao()) {
+                case 1 -> listarLivrosDisponiveis();
+                case 2 -> realizarEmprestimo(cliente);
+                case 3 -> fazerReserva(cliente);
+                case 4 -> listarEmprestimosCliente(cliente);
+                case 5 -> listarReservasCliente(cliente);
+                case 0 -> {
+                    return;
+                }
+                default -> System.out.println("Opção inválida.");
+            }
+        }
+    }
     
 
     
