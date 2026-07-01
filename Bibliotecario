@@ -1,15 +1,15 @@
 package mochila;
- 
+
 import java.util.ArrayList;
 import java.util.List;
- 
+
 public class Bibliotecario extends Pessoa implements Relatorio {
- 
+
     private String matricula;
     private String cargo;
     private String senhaHash;
     private List<Livro> acervo = new ArrayList<>();
- 
+
     public Bibliotecario(String nome, String cpf, String email, String telefone, String matricula, String cargo) {
         super(nome, cpf, email, telefone);
         this.matricula = matricula;
@@ -19,15 +19,15 @@ public class Bibliotecario extends Pessoa implements Relatorio {
     public boolean autenticar(String senha) {
         return senhaHash != null && senhaHash.equals(Integer.toString(senha.hashCode()));
     }
- 
+
     public void alterarSenha(String novaSenha) {
         this.senhaHash = Integer.toString(novaSenha.hashCode());
     }
- 
+
     public Emprestimo registrarEmprestimo(Cliente cliente, Exemplar exemplar) throws LimiteEmprestimosException {
         return cliente.realizarEmprestimo(exemplar);
     }
- 
+
     public Devolucao registrarDevolucao(Emprestimo emprestimo) {
         Devolucao devolucao = new Devolucao(emprestimo);
         devolucao.registrarDevolucao();
@@ -37,32 +37,32 @@ public class Bibliotecario extends Pessoa implements Relatorio {
     public void gerenciarAcervo() {
         acervo.removeIf(livro -> livro.listarExemplares().isEmpty());
     }
- 
+
     public void adicionarAoAcervo(Livro livro) {
         acervo.add(livro);
     }
- 
+
     @Override
     public String gerarRelatorio() {
         return "Bibliotecário " + getNome() + " - " + acervo.size() + " livros no acervo";
     }
- 
+
     public String getMatricula() {
         return matricula;
     }
- 
+
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
- 
+
     public String getCargo() {
         return cargo;
     }
- 
+
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
- 
+
     public List<Livro> getAcervo() {
         return acervo;
     }
