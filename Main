@@ -171,3 +171,32 @@ public class Main {
         System.out.println("Bibliotecário -> matrícula B001, senha 1234");
         System.out.println("Cliente -> matrícula C001, senha 1234");
     }
+
+    private static int lerOpcao() {
+        try {
+            return Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+ 
+    private static void cadastrarCliente() {
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("CPF: ");
+        String cpf = sc.nextLine();
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+        System.out.print("Telefone: ");
+        String telefone = sc.nextLine();
+        System.out.print("Matrícula: ");
+        String matricula = sc.nextLine();
+        System.out.print("Senha: ");
+        String senha = sc.nextLine();
+ 
+        Cliente cliente = new Cliente(nome, cpf, email, telefone, matricula, LocalDate.now());
+        cliente.alterarSenha(senha);
+        clientes.add(cliente);
+        salvarDados();
+        System.out.println("Cliente cadastrado com sucesso.");
+    }
