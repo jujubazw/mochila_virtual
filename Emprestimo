@@ -1,0 +1,25 @@
+package mochila;
+ 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+ 
+public class Emprestimo {
+ 
+    private static int proximoId = 1;
+    private static final int PRAZO_DIAS = 14;
+ 
+    private int id;
+    private Cliente cliente;
+    private Exemplar exemplar;
+    private LocalDate dataEmprestimo;
+    private LocalDate dataPrevistaDevolucao;
+    private StatusEmprestimo status;
+ 
+    public Emprestimo(Cliente cliente, Exemplar exemplar) {
+        this.id = proximoId++;
+        this.cliente = cliente;
+        this.exemplar = exemplar;
+        this.dataEmprestimo = LocalDate.now();
+        this.dataPrevistaDevolucao = dataEmprestimo.plusDays(PRAZO_DIAS);
+        this.status = StatusEmprestimo.ATIVO;
+    }
