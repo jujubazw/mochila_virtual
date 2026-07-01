@@ -21,3 +21,22 @@ public class Devolucao implements Serializable {
         emprestimo.setStatus(StatusEmprestimo.DEVOLVIDO);
         emprestimo.getExemplar().atualizarStatus(StatusExemplar.DISPONIVEL);
     }
+
+    public int getId() {
+        return id;
+    }
+ 
+    public Emprestimo getEmprestimo() {
+        return emprestimo;
+    }
+ 
+    public LocalDate getDataDevolucao() {
+        return dataDevolucao;
+    }
+ 
+    public static void ajustarProximoId(int maiorIdExistente) {
+        if (maiorIdExistente >= proximoId) {
+            proximoId = maiorIdExistente + 1;
+        }
+    }
+}
