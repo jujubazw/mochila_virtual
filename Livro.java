@@ -9,3 +9,12 @@ public class Livro implements Serializable{
   private String isbn;
   private String titulo;
   private int anoPublicacao;
+  private int edicao;
+  private Editora editora;
+  
+  private List<Exemplar> exemplares = new ArrayList<>();
+  private List<Autor> autores = new ArrayList<>();
+  private List<Categoria> categorias = new ArrayList<>();
+
+  public Livro(String isbn, String titulo, int anoPublicacao, int edicao, Editora editora){
+    
