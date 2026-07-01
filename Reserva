@@ -30,3 +30,34 @@ public class Reserva implements Serializable {
     public void notificarCliente() {
         this.status = StatusReserva.NOTIFICADO;
     }
+
+    public int getId() {
+        return id;
+    }
+ 
+    public Cliente getCliente() {
+        return cliente;
+    }
+ 
+    public Livro getLivro() {
+        return livro;
+    }
+ 
+    public LocalDate getDataReserva() {
+        return dataReserva;
+    }
+ 
+    public StatusReserva getStatus() {
+        return status;
+    }
+ 
+    public int getPosicaoFila() {
+        return posicaoFila;
+    }
+ 
+    public static void ajustarProximoId(int maiorIdExistente) {
+        if (maiorIdExistente >= proximoId) {
+            proximoId = maiorIdExistente + 1;
+        }
+    }
+}
