@@ -1,0 +1,52 @@
+package mochila;
+ 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+ 
+public class Main {
+ 
+    private static final String ARQUIVO_DADOS = "dados.ser";
+ 
+    private static Scanner sc = new Scanner(System.in);
+    private static List<Cliente> clientes;
+    private static List<Bibliotecario> bibliotecarios;
+    private static List<Livro> livros;
+    private static List<Autor> autores;
+    private static List<Editora> editoras;
+    private static List<Categoria> categorias;
+    private static List<Emprestimo> emprestimos;
+ 
+    public static void main(String[] args) {
+        carregarDados();
+
+    while (true) {
+            System.out.println("\n=== Mochila Virtual ===");
+            System.out.println("1 - Login Cliente");
+            System.out.println("2 - Login Bibliotecário");
+            System.out.println("3 - Cadastrar Cliente");
+            System.out.println("4 - Cadastrar Bibliotecário");
+            System.out.println("0 - Sair");
+            System.out.print("Opção: ");
+ 
+            switch (lerOpcao()) {
+                case 1 -> loginCliente();
+                case 2 -> loginBibliotecario();
+                case 3 -> cadastrarCliente();
+                case 4 -> cadastrarBibliotecario();
+                case 0 -> {
+                    salvarDados();
+                    System.out.println("Até mais.");
+                    return;
+                }
+                default -> System.out.println("Opção inválida.");
+            }
+        }
+    }
