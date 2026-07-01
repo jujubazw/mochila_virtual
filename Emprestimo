@@ -1,20 +1,21 @@
 package mochila;
- 
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
- 
-public class Emprestimo {
- 
+import java.io.Serializable;
+
+public class Emprestimo implements Serializable {
+
     private static int proximoId = 1;
     private static final int PRAZO_DIAS = 14;
- 
+
     private int id;
     private Cliente cliente;
     private Exemplar exemplar;
     private LocalDate dataEmprestimo;
     private LocalDate dataPrevistaDevolucao;
     private StatusEmprestimo status;
- 
+
     public Emprestimo(Cliente cliente, Exemplar exemplar) {
         this.id = proximoId++;
         this.cliente = cliente;
@@ -27,7 +28,7 @@ public class Emprestimo {
     public int calcularPrazo() {
         return (int) ChronoUnit.DAYS.between(LocalDate.now(), dataPrevistaDevolucao);
     }
- 
+
     public boolean verificarAtraso() {
         boolean atrasado = status == StatusEmprestimo.ATIVO && LocalDate.now().isAfter(dataPrevistaDevolucao);
         if (atrasado) {
@@ -35,23 +36,23 @@ public class Emprestimo {
         }
         return atrasado;
     }
- 
+
     public int getId() {
         return id;
     }
- 
+
     public Cliente getCliente() {
         return cliente;
     }
- 
+
     public Exemplar getExemplar() {
         return exemplar;
     }
- 
+
     public LocalDate getDataEmprestimo() {
         return dataEmprestimo;
     }
- 
+
     public LocalDate getDataPrevistaDevolucao() {
         return dataPrevistaDevolucao;
     }
@@ -59,8 +60,14 @@ public class Emprestimo {
     public StatusEmprestimo getStatus() {
         return status;
     }
- 
+
     public void setStatus(StatusEmprestimo status) {
         this.status = status;
+    }
+
+    public static void ajustarProximoId(int maiorIdExistente) {
+        if (maiorIdExistente >= proximoId) {
+            proximoId = maiorIdExistente + 1;
+        }
     }
 }
