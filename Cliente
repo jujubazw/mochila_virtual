@@ -33,4 +33,23 @@ public class Cliente extends Pessoa {
     private String gerarHash(String senha) {
         return Integer.toString(senha.hashCode());
     }
+
+    public Emprestimo realizarEmprestimo(Exemplar exemplar) throws LimiteEmprestimosException {
+        long ativos = emprestimos.stream()
+                .filter(e -> e.getStatus() == StatusEmprestimo.ATIVO)
+                .count();
  
+        if (ativos >= LIMITE_EMPRESTIMOS) {
+            throw new LimiteEmprestimosException(
+                    "Cliente " + getNome() + " já atingiu o limite de " + LIMITE_EMPRESTIMOS + " empréstimos ativos");
+        }
+ 
+        if (!exemplar.verificarDisponibilidade()) {
+            throw new IllegalStateException("Exemplar " + exemplar.getCodigoExemplar() + " não está disponível");
+        }
+ 
+        Emprestimo emprestimo = new Emprestimo(this, exemplar);
+        exemplar.atualizarStatus(StatusExemplar.EMPRESTADO);
+        emprestimos.add(emprestimo);
+        return emprestimo;
+    }
