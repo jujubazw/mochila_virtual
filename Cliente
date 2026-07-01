@@ -53,3 +53,34 @@ public class Cliente extends Pessoa {
         emprestimos.add(emprestimo);
         return emprestimo;
     }
+
+    public Reserva fazerReserva(Livro livro) {
+        Reserva reserva = new Reserva(this, livro);
+        livro.registrarReserva(reserva);
+        reservas.add(reserva);
+        return reserva;
+    }
+ 
+    public String getMatricula() {
+        return matricula;
+    }
+ 
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+ 
+    public LocalDate getDataIngresso() {
+        return dataIngresso;
+    }
+ 
+    public void setDataIngresso(LocalDate dataIngresso) {
+        this.dataIngresso = dataIngresso;
+    }
+ 
+    public boolean isAtivo() {
+        return ativo;
+    }
+ 
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
