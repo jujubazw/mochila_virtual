@@ -1,13 +1,13 @@
 package mochila;
- 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
- 
+
 public class Cliente extends Pessoa {
- 
+
     private static final int LIMITE_EMPRESTIMOS = 3;
- 
+
     private String matricula;
     private LocalDate dataIngresso;
     private boolean ativo;
@@ -21,15 +21,15 @@ public class Cliente extends Pessoa {
         this.dataIngresso = dataIngresso;
         this.ativo = true;
     }
- 
+
     public boolean autenticar(String senha) {
         return senhaHash != null && senhaHash.equals(gerarHash(senha));
     }
- 
+
     public void alterarSenha(String novaSenha) {
         this.senhaHash = gerarHash(novaSenha);
     }
- 
+
     private String gerarHash(String senha) {
         return Integer.toString(senha.hashCode());
     }
@@ -38,16 +38,16 @@ public class Cliente extends Pessoa {
         long ativos = emprestimos.stream()
                 .filter(e -> e.getStatus() == StatusEmprestimo.ATIVO)
                 .count();
- 
+
         if (ativos >= LIMITE_EMPRESTIMOS) {
             throw new LimiteEmprestimosException(
                     "Cliente " + getNome() + " já atingiu o limite de " + LIMITE_EMPRESTIMOS + " empréstimos ativos");
         }
- 
+
         if (!exemplar.verificarDisponibilidade()) {
             throw new IllegalStateException("Exemplar " + exemplar.getCodigoExemplar() + " não está disponível");
         }
- 
+
         Emprestimo emprestimo = new Emprestimo(this, exemplar);
         exemplar.atualizarStatus(StatusExemplar.EMPRESTADO);
         emprestimos.add(emprestimo);
@@ -60,27 +60,27 @@ public class Cliente extends Pessoa {
         reservas.add(reserva);
         return reserva;
     }
- 
+
     public String getMatricula() {
         return matricula;
     }
- 
+
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
- 
+
     public LocalDate getDataIngresso() {
         return dataIngresso;
     }
- 
+
     public void setDataIngresso(LocalDate dataIngresso) {
         this.dataIngresso = dataIngresso;
     }
- 
+
     public boolean isAtivo() {
         return ativo;
     }
- 
+
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
@@ -88,7 +88,7 @@ public class Cliente extends Pessoa {
     public List<Emprestimo> getEmprestimos() {
         return emprestimos;
     }
- 
+
     public List<Reserva> getReservas() {
         return reservas;
     }
