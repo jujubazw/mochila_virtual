@@ -7,3 +7,5 @@ import java.io.Serializable;
 public class Livro implements Serializable{
 
   private String isbn;
+  private String titulo;
+  private int anoPublicacao;
