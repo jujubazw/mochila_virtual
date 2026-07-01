@@ -14,4 +14,23 @@ public class Cliente extends Pessoa {
     private String senhaHash;
     private List<Emprestimo> emprestimos = new ArrayList<>();
     private List<Reserva> reservas = new ArrayList<>();
+
+    public Cliente(String nome, String cpf, String email, String telefone, String matricula, LocalDate dataIngresso) {
+        super(nome, cpf, email, telefone);
+        this.matricula = matricula;
+        this.dataIngresso = dataIngresso;
+        this.ativo = true;
+    }
+ 
+    public boolean autenticar(String senha) {
+        return senhaHash != null && senhaHash.equals(gerarHash(senha));
+    }
+ 
+    public void alterarSenha(String novaSenha) {
+        this.senhaHash = gerarHash(novaSenha);
+    }
+ 
+    private String gerarHash(String senha) {
+        return Integer.toString(senha.hashCode());
+    }
  
