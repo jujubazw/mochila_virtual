@@ -1,0 +1,17 @@
+package mochila;
+ 
+import java.util.ArrayList;
+import java.util.List;
+ 
+public class Bibliotecario extends Pessoa implements Relatorio {
+ 
+    private String matricula;
+    private String cargo;
+    private String senhaHash;
+    private List<Livro> acervo = new ArrayList<>();
+ 
+    public Bibliotecario(String nome, String cpf, String email, String telefone, String matricula, String cargo) {
+        super(nome, cpf, email, telefone);
+        this.matricula = matricula;
+        this.cargo = cargo;
+    }
