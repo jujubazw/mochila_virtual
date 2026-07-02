@@ -36,7 +36,7 @@ public class Exemplar implements Serializable{
   public void setCodigoExemplar(String codigoExemplar){
     this.codigoExemplar = codigoExemplar;
   }
-
+  
   
 
 }
