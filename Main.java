@@ -432,6 +432,29 @@ private static void realizarEmprestimo(Cliente cliente){
   System.out.println(e.getMessage());
  }
 }
+ 
+ private static void registrarEmprestimo(Bibliotecario bibliotecario) {
+  System.out.print("Matrícula do cliente: ");
+  String matricula = sc.nextLine();
+
+  Cliente cliente = clietes.stream()
+   .filter(c -> c.getMatricula().equals(matricula))
+   .findFirst()
+   .orElse(null);
+
+  if (cliente == null){
+   System.out.println("Cliente não encontrado.");
+   return;
+  }
+
+  System.out.print("Código do exemplar: ");
+  String codigo = sc.nextLine();
+
+  
+
+  
+
+ 
 
  
   
