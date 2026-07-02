@@ -53,3 +53,7 @@ public int getReservasAtivas(){
   return (int) reservas.stream().filter(r -> r.getStatus() == StatusReserva.PENDENTE).count();
 }
 
+public String getIsbn(){
+  return isbn;
+}
+
