@@ -24,36 +24,80 @@ public class Livro implements Serializable{
     this.edicao = edicao;
     this.editora = editora;
   }
+  
+  public boolean buscarDisponibilidade(){
+    return exemplares.stream().anyMatch(Exemplar::verificarDisponibilidade);
+  }
 
-public boolean buscarDisponibilidade(){
-  return exemplares.stream().anyMatch(Exemplar::verificarDisponibilidade);
+  public List<Exemplar> listarExemplares(){
+    return exemplares;
+  }
+  
+  public void adicionarExemplar(Exemplar exemplar){
+    exemplares.add(exemplar);
+  }
+  
+  public void adicionarAutor(Autor autor){
+    autores.add(autor);
+  }
+  
+  public void adicionarCategoria(Categoria categoria){
+    categorias.add(categoria);
+  }
+  
+  public void registrarReserva(Reserva reserva){
+    reservas.add(reserva);
+  }
+  
+  public int getReservasAtivas(){
+    return (int) reservas.stream().filter(r -> r.getStatus() == StatusReserva.PENDENTE).count();
+  }
+  
+  public String getIsbn(){
+    return isbn;
+  }
+  
+  public void setIsbn(String isbn){
+    this.isbn = isbn;
+  }
+  
+  public String getTitulo(){
+    return titulo;
+  }
+  
+  public void setTitulo(String titulo){
+    this.titulo = titulo;
+  }
+  
+  public int getAnoPublicacao(){
+    return anoPublicacao;
+  }
+  
+  public void setAnoPublicacao(int anoPublicacao){
+    this.anoPublicacao = anoPublicacao;
+  }
+  
+  public int getEdicao(){
+    return edicao;
+  }
+  
+  public void setEdicao(int edicao){
+    this.edicao = edicao;
+  }
+  
+  public Editora getEditora(){
+    return editora;
+  }
+  
+  public void setEditora(Editora editora){
+    this.editora = editora;
+  }
+  
+  public List<Autor> getAutores(){
+    return autores;
+  }
+  
+  public List<Categoria> getCategorias(){
+    return categorias;
+  }
 }
-
-public List<Exemplar> listarExemplares(){
-  return exemplares;
-}
-
-public void adicionarExemplar(Exemplar exemplar){
-  exemplares.add(exemplar);
-}
-
-public void adicionarAutor(Autor autor){
-  autores.add(autor);
-}
-
-public void adicionarCategoria(Categoria categoria){
-  categorias.add(categoria);
-}
-
-public void registrarReserva(Reserva reserva){
-  reservas.add(reserva);
-}
-
-public int getReservasAtivas(){
-  return (int) reservas.stream().filter(r -> r.getStatus() == StatusReserva.PENDENTE).count();
-}
-
-public String getIsbn(){
-  return isbn;
-}
-
