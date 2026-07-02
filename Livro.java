@@ -28,3 +28,28 @@ public class Livro implements Serializable{
 public boolean buscarDisponibilidade(){
   return exemplares.stream().anyMatch(Exemplar::verificarDisponibilidade);
 }
+
+public List<Exemplar> listarExemplares(){
+  return exemplares;
+}
+
+public void adicionarExemplar(Exemplar exemplar){
+  exemplares.add(exemplar);
+}
+
+public void adicionarAutor(Autor autor){
+  autores.add(autor);
+}
+
+public void adicionarCategoria(Categoria categoria){
+  categorias.add(categoria);
+}
+
+public void registrarReserva(Reserva reserva){
+  reservas.add(reserva);
+}
+
+public int getReservasAtivas(){
+  return (int) reservas.stream().filter(r -> r.getStatus() == StatusReserva.PENDENTE).count();
+}
+
