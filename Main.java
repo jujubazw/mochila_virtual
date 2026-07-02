@@ -512,6 +512,42 @@ private static void realizarEmprestimo(Cliente cliente){
    return;
   }
 
+  Reserva reserva = cliente.fazerReserva(livro);
+  salvarDados();
+  System.out.println("Reserva feita. Posição na fila: " + reserva.getPosicaoFila());
+ }
+
+ private static void listarEmprestimosCliente(Cliente cliente){
+  if(cliente.getEmprestimo().isEmpty()){
+   System.out.println("Nenhum empréstimo realizado.");
+   return;
+  }
+
+  for(Emprestimo e : cliente.getEmprestimo()){
+   System.out.println("Id " + e.getId() + " - exemplar " + e.getExemplar().getCodigoExemplar() + " - status " + e.getStatus() + " - devolução prevista " + e.getDataPrevistaDevolucao());
+  }
+ }
+
+ private static void listarReservasCliente(Cliente cliente){
+  if(cliente.getReservas().isEmpty()){
+   System.out.println("Nenhuma reserva feita.");
+   return;
+  }
+
+  for(Reserva r : cliente.getReservas()){
+   System.out.println("Id " + r.getId() + " - livro " + r.getlivro().getTitulo() + " - status " + r.getStatus() + " - posição " + r.getPosicaoFila());
+  }
+ }
+
+ private static int lerInt(){
+  try{
+   return Integer.parseInt(sc.nextLine().trim());
+  }catch(NumberFormatException e){
+   return 0;
+  }
+ }
+}
+
   
 
 
