@@ -1,9 +1,3 @@
-
-
-
-
-
-
 package mochila;
 
 import java.time.LocalDate;
@@ -36,7 +30,16 @@ public class Exemplar implements Serializable{
   public void setCodigoExemplar(String codigoExemplar){
     this.codigoExemplar = codigoExemplar;
   }
-  
-  
 
+  public StatusExemplar getStatus(){
+    return status;
+  }
+
+  public LocalDate getDataAquisicao(){
+    return dataAquisicao;
+  }
+
+  public void setDataAquisicao(LocalDate dataAquisicao){
+    this.dataAquisicao = dataAquisicao;
+  }
 }
