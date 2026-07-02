@@ -422,6 +422,20 @@ private static void realizarEmprestimo(Cliente cliente){
   System.out.println("Não há exemplares disponíveis para este livro.");
   return;
  }
+
+ try{
+  Emprestimo emprestimo = cliente.realizarEmprestimo(exemplar);
+  emprestimos.add(emprestimo);
+  salvarDados();
+  System.out.println("Empréstimo realizado. Devolução prevista em " + emprestimo.calcularPrazo() + " dias.");
+ }catch(LimiteEmprestimosException e){
+  System.out.println(e.getMessage());
+ }
+}
+
+ 
+  
+  
   
 
  
