@@ -450,6 +450,57 @@ private static void realizarEmprestimo(Cliente cliente){
   System.out.print("Código do exemplar: ");
   String codigo = sc.nextLine();
 
+  Exemplar exemplar = livros.stream()
+   .flatMap(l -> l.listarExemplares().stream())
+   .filter(e -> e.getCodigoExemplar().equals(codigo))
+   .findFirst()
+   .orElse(null);
+  
+  if (exemplar == null) {
+   System.out.println("Exemplar não encontrado.");
+   return;
+  }
+  
+  try{
+   Emprestimo emprestimo = bibliotecario.registrarEmprestimo(cliente, exemplar);
+   emprestimos.add(emprestimo);
+   salvarDados();
+   System.out.println("Empréstimo registrado, id: " + emprestimo.getId());
+  }catch(LimiteEmprestimosException e){
+   System.out.println(e.getMessage());
+  }catch (IllegalStateException e){
+   System.out.println(e.getMessage());
+  }
+ }
+
+ private static void registrarDevolucao() {
+  System.out.print("Id do empréstimo: ");
+  int id = lerInt();
+
+  Emprestimo emprestimo = emprestimos.stream()
+   .filter(e -> e.getId() == id)
+   .findFirst()
+   .orElse(null);
+
+  if (emprestimo == null) {
+   System.out.println("Empréstimo não encontrado.");
+   return;
+  }
+
+  if (emprestimo.getStatus() == StatusEmprestimo.DEVOLVIDO) {
+   System.out.println("Este empréstimo já foi devolvido.");
+   return;
+  }
+
+  Devolucao devolucao = new Devolucao(emprestimo);
+  devolucao.registrarDevolucao();
+  salvarDados();
+  System.out.println("Devolução registrada.");
+ }
+
+
+  
+
   
 
   
