@@ -1,6 +1,5 @@
-
-
 package mochila;
+
 import java.io.Serializable;
 
 public class Categoria implements Serializable{
@@ -14,5 +13,24 @@ public class Categoria implements Serializable{
     this.nome = nome;
     this.descricao = descricao;
   }
-  
+
+  public int getId(){
+    return id;
+  }
+
+  public String getNome(){
+    return nome;
+  }
+
+  public void setNome(String nome){
+    this.nome = nome;
+  }
+
+  public String getDescricao(){
+    resturn descricao;
+  }
+
+  public void setDescricao(String descricao){
+    this.descricao = descricao;
+  }
 }
