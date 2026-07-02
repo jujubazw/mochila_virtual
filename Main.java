@@ -284,6 +284,101 @@ public class Main {
             }
         }
     }
+    private static void menuBibliotecario(Bibliotecario bibliiotecario){
+     while(true){
+      System.out.println("\n--- Olá, " + bibliotecario.getNome() + " (" + bibliotecario.getCargo() + ") ---");
+      System.out.println("1 - Cadastrar livro");
+      System.out.println("2 - Resgistrar empréstimo");
+      System.out.println("3 - Rgistrar devolução");
+      System.out.println("4 - Ver acervo");
+      System.out.println("5 - Gerenciar acervo");
+      System.out.println("6 - Gerar relatório");
+      System.out.println("0 - Logout");
+      System.out.print("Opção: ");
+
+      switch(lerOpcao()){
+       case 1 -> cadastrarLivro(bibliotecario);
+       case 2 -> registrarEmprestimo(bibliotecario);
+       case 3 -> registrarDevolucao();
+       case 4 -> listarLivrosDisponiveis();
+       case 5 -> {
+        bibliotecario.gerenciarAcervo();
+        salvarDados();
+        System.out.println("Acervo atualizado.");
+       }
+       case 6 -> System.out.println(bibliotecario.gerarRelatorio());
+       case 0 -> {
+        return;
+       }
+        default -> System.out.println("Opção inválida.");
+       }
+     }
+    }
+
+ private static void cadastrarLivro(Bibliotecario bibliotecario){
+  System.out.print("ISBN: ");
+  String isbn = sc.nextLine();
+  System.out.print("Título: ");
+  String titulo = sc.nextLine();
+  System.out.print("Ano de publicação: ");
+  int ano = lerInt();
+  System.out.print("Edição: ");
+  int edicao = lerInt();
+
+  System.out.print("Nome da editora: ");
+  String nomeEditora = sc.nextLine();
+  Editora editora = buscarOuCriarEditora(nomeEditora);
+
+  Livro livro = new Livro(isbn, titulo, ano, edicao, editora);
+
+  System.out.print("Nome do autor: ");
+  String nomeAutor = sc.nextLine();
+  livro.adicionarAutor(buscarOuCriarAutor(nomeAutor));
+
+  System.out.print("Categoria: ");
+  String nomeCategoria = sc.nextLine();
+  livro.adicionarCategoria(buscarOuCriarCategoria(nomeCategoria));
+
+  System.out.print("Quantos exemplares deseja cadastrar? ");
+  int qtd = lerInt();
+  for(int i = 1; i <= qtd; i++){
+   String codigo = isbn + "-" +i;
+   livro.adicionarExemplar(new Exemplar(codigo, LocalDate.now()));
+  }
+
+  livros.add(livro);
+  bibliotecario.adicionarAoAcervo(livro);
+  salvarDados();
+  System.out.println("Livro cadastrado com + " + qtd + " exemplar(es).");
+ }
+
+ private static Editora buscarOuCriarEditora(String nome){
+  return editoras.stream()
+   .filter(e -> e.getNome().equalsIgnorecase(nome))
+   .findFirst()
+   .orElseGet(() -> {
+    Editora nova = new Editora(editoras.size() + 1, nome, "");
+    editoras.add(nova);
+    return nova;
+   });
+ }
+
+ private static Autor buscarOuCriarAutor(String nome){
+  return autores.stream()
+   .filter(a -> a.getNome().equalsIgnorecase(nome))
+   .findFirst()
+   .orElseGet(() -> {
+    Autor novo = new Autor(autores.size() + 1, nome, "");
+    autores.add(novo);
+    return novo;
+   });
+ }
+   
+   
+      
+ 
+ 
+ 
     
 
     
