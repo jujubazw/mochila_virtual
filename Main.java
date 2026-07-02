@@ -401,3 +401,39 @@ public class Main {
 
 private static void realizarEmprestimo(Cliente cliente){
  System.out.print("ISBN do livro: ");
+ String isbn = sc.nextLine();
+
+ Livro livro : livros.stream()
+  .filter(1 -> 1.getIsbn().equals(isbn))
+  .findFirst()
+  .orElse(null);
+
+ if(livro == null){
+  System.out.println("Livro não encontrado.");
+  return;
+ }
+
+ Exemplar exemplar = livro.listarExemplares().stream()
+  .filter(Exemplar::verificarDisponibilidade)
+  .findFirst()
+  .orElse(null);
+
+ if (exemplar == null){
+  System.out.println("Não há exemplares disponíveis para este livro.");
+  return;
+ }
+  
+
+ 
+  
+  
+
+
+
+
+
+
+
+
+
+ 
