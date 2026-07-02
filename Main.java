@@ -373,6 +373,19 @@ public class Main {
     return novo;
    });
  }
+
+ private static Categoria buscarOuCriarCategoria(String nome){
+  return categorias.stream()
+   .filter(c -> c.getNome().equalsIgnorecase(nome))
+   .findFirst()
+   .orElseGet(() -> {
+    Categoria nova = new Categoria(Categorias.size() + 1, nome, "");
+    editoras.add(nova);
+    return nova;
+   });
+ }
+
+ private
    
    
       
