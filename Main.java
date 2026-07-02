@@ -385,13 +385,19 @@ public class Main {
    });
  }
 
- private
-   
-   
-      
- 
- 
- 
-    
+ private static void listarLivrosDisponiveis(){
+  if(livros.isEmpty()){
+   System.out.println("Nenhum livro cadastrado ainda.");
+   return;
+  }
 
-    
+  for(Livro livro : livros){
+   long disponiveis = livro.listarExemplares().stream()
+    .filter(Exemplar::verificarDisponibilidade)
+    .count();
+   System.out.print(livro.getIsbn() + " - " + livro.getTitulo() + " (" +disponiveis + "diponíveis)");
+  }
+ }
+
+private static void realizarEmprestimo(Cliente cliente){
+ System.out.print("ISBN do livro: ");
